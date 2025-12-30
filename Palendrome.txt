@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+
+int isPalindrome(char str[]) {
+    int left = 0;
+    int right = strlen(str) - 1;
+
+    // Continue as long as the left index is less than the right index
+    while (left < right) {
+        // If characters at the current positions don't match, it's not a palindrome
+        if (str[left] != str[right]) {
+            return 0; // Not a palindrome
+        }
+        // Move the pointers inward
+        left++;
+        right--;
+    }
+    // If the loop completes without a mismatch, the string is a palindrome
+    return 1; // Palindrome
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    // Using fgets for safer input handling, it includes the newline character
+    // and limits input size to prevent buffer overflow.
+    fgets(str, sizeof(str), stdin);
+
+    // Remove the newline character if present
+    size_t len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') {
+        str[len - 1] = '\0';
+    }
+
+    if (isPalindrome(str)) {
+        printf("\"%s\" is a palindrome.\\n", str);
+    } else {
+        printf("\"%s\" is not a palindrome.\\n", str);
+    }
+
+    return 0;
+}
